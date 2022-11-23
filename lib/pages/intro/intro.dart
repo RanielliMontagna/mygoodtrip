@@ -9,6 +9,10 @@ class Intro extends StatefulWidget {
 }
 
 class _IntroState extends State<Intro> {
+  void _onPressed() {
+    Navigator.pushNamed(context, '/login');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,19 +21,26 @@ class _IntroState extends State<Intro> {
         backgroundColor: Colors.transparent,
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(18),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
-                    const Text(
-                      'Com o My Good Trip você pode criar uma viagem e planejar tudo o que você precisa para ela!',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                    Image.asset(
+                      'assets/intro/car.png',
+                      width: 300,
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.2),
-                    Button(text: 'Começar', onPressed: () {})
+                    const SizedBox(height: 24),
+                    const Text(
+                      'Com o My Good Trip você pode criar uma viagem e planejar tudo o que você precisa, desde o roteiro até o orçamento!',
+                      style: TextStyle(
+                        fontSize: 24,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 24),
+                    Button(text: 'Começar', onPressed: _onPressed)
                   ],
                 ),
               ),
