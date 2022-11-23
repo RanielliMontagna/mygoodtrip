@@ -23,7 +23,12 @@ class ViagensRepository {
     Database db = await DatabaseService.datebase;
 
     try {
-      // await db.insert(nameDatabase, viagens);
+      await db.insert(nameDatabase, {
+        'destino': viagens['destino'],
+        'dataInicio': viagens['dataInicio'],
+        'dataFim': viagens['dataFim'],
+        'orcamento': viagens['orcamento'],
+      });
     } catch (err) {
       throw Exception(
           'Ocorreu algum erro ao inserir as questões. Motivo: $err');
@@ -34,7 +39,19 @@ class ViagensRepository {
     Database db = await DatabaseService.datebase;
 
     try {
-      // await db.update(nameDatabase, viagens);
+      await db.update(
+        nameDatabase,
+        {
+          'destino': viagens['destino'],
+          'dataInicio': viagens['dataInicio'],
+          'dataFim': viagens['dataFim'],
+          'orcamento': viagens['orcamento'],
+        },
+        where: 'id = ?',
+        whereArgs: [
+          viagens['id'],
+        ],
+      );
     } catch (err) {
       throw Exception(
           'Ocorreu algum erro ao atualizar as questões. Motivo: $err');
