@@ -1,16 +1,32 @@
-# mygoodtrip
+<div align="center">
+  <img
+    src="https://raw.githubusercontent.com/RanielliMontagna/mygoodtrip/master/assets/logo.png"
+    width="200"
+    height="200"
+  />
+</div>
 
-A new Flutter project.
+# My Good Trip
 
-## Getting Started
+Projeto desenvolvido durante a faculdade de ADS (Análise e Desenvolvimento de Sistemas) na disciplina de Desenvolvimento de Aplicativos Móveis.
 
-This project is a starting point for a Flutter application.
+## 🚀 O que é?
 
-A few resources to get you started if this is your first Flutter project:
+É um aplicativo que tem como objetivo ajudar pessoas a se organizarem para uma viagem, seja ela de lazer ou trabalho. Nele é possível criar uma viagem, adicionando os gastos serão realizados.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📱 Tecnologias
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Dart](https://dart.dev/) - Linguagem de programação utilizada para desenvolver o aplicativo
+- [Flutter](https://flutter.dev/) - Framework para desenvolvimento de aplicativos móveis
+- [SQLite](https://www.sqlite.org/index.html) - Banco de dados relacional para armazenamento de dados
+
+## ⚡️ Como rodar o projeto?
+
+- Clone o repositório
+- Instale as dependências com `flutter pub get`
+- Rode o projeto com `flutter run`
+
+## 👨‍💻 Autores
+
+- [@raniellimontagna](https://github.com/RanielliMontagna)
+- [@cleitonbeal](https://github.com/cleiton-Beal)
