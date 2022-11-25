@@ -4,13 +4,14 @@ import 'package:sqflite/sqflite.dart';
 class ViagensRepository {
   static const nameDatabase = 'viagens';
 
-  Future<Map?> getViagens() async {
+  static Future<List<Map?>?> getViagens() async {
     Database db = await DatabaseService.datebase;
 
     try {
       List<Map> result = await db.rawQuery('SELECT * FROM $nameDatabase');
+      print(result.toList());
       if (result.isNotEmpty) {
-        return result[0];
+        return result.toList();
       } else {
         return null;
       }
@@ -19,7 +20,7 @@ class ViagensRepository {
     }
   }
 
-  Future<void> insertViagens(Map viagens) async {
+  static Future<void> insertViagens(Map viagens) async {
     Database db = await DatabaseService.datebase;
 
     try {
@@ -30,8 +31,7 @@ class ViagensRepository {
         'orcamento': viagens['orcamento'],
       });
     } catch (err) {
-      throw Exception(
-          'Ocorreu algum erro ao inserir as questões. Motivo: $err');
+      throw Exception('Ocorreu algum erro ao inserir as questões. Motivo: $err');
     }
   }
 
@@ -53,8 +53,7 @@ class ViagensRepository {
         ],
       );
     } catch (err) {
-      throw Exception(
-          'Ocorreu algum erro ao atualizar as questões. Motivo: $err');
+      throw Exception('Ocorreu algum erro ao atualizar as questões. Motivo: $err');
     }
   }
 
@@ -64,8 +63,7 @@ class ViagensRepository {
     try {
       await db.rawQuery('DELETE FROM $nameDatabase WHERE id = $id');
     } catch (err) {
-      throw Exception(
-          'Ocorreu algum erro ao deletar as questões. Motivo: $err');
+      throw Exception('Ocorreu algum erro ao deletar as questões. Motivo: $err');
     }
   }
 }
