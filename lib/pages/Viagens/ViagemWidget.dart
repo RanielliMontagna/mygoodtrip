@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -19,40 +20,54 @@ class _ViagemWidgetState extends State<ViagemWidget> {
       onTap: () {
         Navigator.pushNamed(
           context,
-          '/createViagem',
+          '/listEventos',
         );
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2),
-        child: Slidable(
-          actionPane: const SlidableBehindActionPane(),
-          actionExtentRatio: 0.25,
-          secondaryActions: [
-            IconSlideAction(
-              caption: 'Excluir',
-              color: Colors.red,
-              icon: Icons.delete,
-              onTap: () {},
-            ),
-          ],
-          child: Container(
-            height: height * 0.18,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(7),
-              color: Colors.grey[300],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Column(
+        padding: const EdgeInsets.symmetric(vertical: 0),
+        child: Container(
+          height: height * 0.18,
+          decoration: BoxDecoration(
+            boxShadow: <BoxShadow>[BoxShadow(color: Color.fromARGB(255, 92, 225, 230), blurRadius: 3.0, offset: Offset(0.0, 0.75))],
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+            color: Color.fromARGB(255, 0, 74, 173),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Center(
+                  child: Column(
                     children: [
+                      Container(
+                        width: width * 0.4,
+                        height: height * 0.2,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/logo.png'),
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            'Viagem para ${map?['destino']}',
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          SizedBox(height: height * 0.1),
+                          Expanded(
+                            child: Center(
+                              child: AutoSizeText(
+                                'Viagem para ${map?['destino']}',
+                                maxLines: 1,
+                                presetFontSizes: [25, 20, 14],
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                                minFontSize: 5,
+                                maxFontSize: 30,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -60,40 +75,48 @@ class _ViagemWidgetState extends State<ViagemWidget> {
                         height: 5,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Data de ida: ${map?['dataInicio']}',
                             style: const TextStyle(
+                              color: Colors.white,
                               fontSize: 15,
                             ),
                           ),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Data de volta: ${map?['dataFim']}',
                             style: const TextStyle(
+                              color: Colors.white,
                               fontSize: 15,
                             ),
                           ),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Valor estipulado: R\$ ${map?['orcamento']}',
                             style: const TextStyle(
+                              color: Colors.white,
                               fontSize: 15,
                             ),
                           ),
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Valor já gasto: R\$ 120.00 ',
                             style: const TextStyle(
+                              color: Colors.white,
                               fontSize: 15,
                             ),
                           ),
@@ -101,8 +124,8 @@ class _ViagemWidgetState extends State<ViagemWidget> {
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

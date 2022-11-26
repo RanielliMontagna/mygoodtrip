@@ -1,9 +1,12 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mygoodtrip/pages/Viagens/ViagemWidget.dart';
 import 'package:mygoodtrip/repository/viagens_repository.dart';
 
 class ListViagens extends StatefulWidget {
   ListViagens({super.key});
+
+  String title = 'Viagem';
   @override
   State<ListViagens> createState() => _ListViagensState();
 }
@@ -18,10 +21,10 @@ class _ListViagensState extends State<ListViagens> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Container(
-      color: Colors.white,
-      child: Scaffold(
-        body: SafeArea(
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          color: Color.fromARGB(255, 0, 74, 173),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -31,7 +34,7 @@ class _ListViagensState extends State<ListViagens> {
                 ),
                 const Text(
                   'Viagens',
-                  style: TextStyle(fontSize: 40),
+                  style: TextStyle(fontSize: 40, color: Colors.white),
                 ),
                 SizedBox(
                   height: height * 0.02,
@@ -43,13 +46,19 @@ class _ListViagensState extends State<ListViagens> {
                       List<Map?>? data = snapshot.data;
                       if (data == null) {
                         return const Center(
-                          child: CircularProgressIndicator(color: Color(0xFF303349)),
+                          child: CircularProgressIndicator(color: Colors.white),
                         );
                       } else {
-                        return ListView.builder(
+                        return CarouselSlider.builder(
                           itemCount: data.length,
-                          padding: const EdgeInsets.all(8),
-                          itemBuilder: (context, index) => ViagemWidget(map: data[index]),
+                          itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) => ViagemWidget(map: data[itemIndex]),
+                          options: CarouselOptions(
+                            height: height * 0.5,
+                            enableInfiniteScroll: false,
+                            disableCenter: false,
+                            viewportFraction: 0.8,
+                            enlargeCenterPage: true,
+                          ),
                         );
                       }
                     },
@@ -59,13 +68,13 @@ class _ListViagensState extends State<ListViagens> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed('/createViagem');
-          },
-          backgroundColor: Colors.blue[800],
-          child: const Icon(Icons.add),
-        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed('/createViagem');
+        },
+        backgroundColor: Colors.blue[800],
+        child: const Icon(Icons.add),
       ),
     );
   }

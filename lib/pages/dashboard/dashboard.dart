@@ -43,7 +43,7 @@ class _DashboardState extends State<Dashboard> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color(0xFF3F5AA6),
+            backgroundColor: Color.fromARGB(255, 0, 74, 173),
             title: Text("Home"),
           ),
           bottomNavigationBar: menu(),
@@ -72,7 +72,7 @@ class _DashboardState extends State<Dashboard> {
 
 Widget menu() {
   return Container(
-    color: Color(0xFF3F5AA6),
+    color: Color.fromARGB(255, 0, 74, 173),
     child: TabBar(
       labelColor: Colors.white,
       unselectedLabelColor: Colors.white70,
