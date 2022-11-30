@@ -55,7 +55,9 @@ class _ListViagensState extends State<ListViagens> {
                             itemCount: viagens.length,
                             itemBuilder: (BuildContext context, int itemIndex,
                                     int pageViewIndex) =>
-                                ViagemWidget(map: viagens[itemIndex]),
+                                ViagemWidget(
+                                    map: viagens[itemIndex],
+                                    getViagens: getViagens),
                             options: CarouselOptions(
                               height: height * 0.5,
                               enableInfiniteScroll: false,

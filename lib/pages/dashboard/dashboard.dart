@@ -38,7 +38,7 @@ class _DashboardState extends State<Dashboard> {
     return MaterialApp(
       onGenerateRoute: RouteGenerator.generateRoute,
       home: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: const Color.fromARGB(255, 0, 74, 173),
@@ -57,7 +57,6 @@ class _DashboardState extends State<Dashboard> {
                     name: name ?? '',
                   ),
                   ListViagens(),
-                  const Icon(Icons.directions_bike),
                 ],
               ),
             ),
@@ -86,10 +85,6 @@ Widget menu() {
         Tab(
           text: "Viagens",
           icon: Icon(Icons.wallet_travel),
-        ),
-        Tab(
-          text: "Relatórios",
-          icon: Icon(Icons.insert_chart_outlined_outlined),
         ),
       ],
     ),

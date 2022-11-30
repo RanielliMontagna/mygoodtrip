@@ -1,7 +1,7 @@
 import 'package:mygoodtrip/services/database_service/database_service.dart';
 import 'package:sqflite/sqflite.dart';
 
-class ViagensRepository {
+class EventosRepository {
   static const nameDatabase = 'eventos';
 
   Future<Map?> getEventos() async {

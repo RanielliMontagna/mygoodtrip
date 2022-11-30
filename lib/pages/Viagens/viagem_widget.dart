@@ -1,9 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:mygoodtrip/repository/eventos_repository.dart';
+import 'package:mygoodtrip/repository/viagens_repository.dart';
+import 'package:mygoodtrip/utils/dialogs.dart';
 
 class ViagemWidget extends StatefulWidget {
   Map? map;
-  ViagemWidget({super.key, this.map});
+  Function getViagens;
+
+  ViagemWidget({super.key, this.map, required this.getViagens});
 
   @override
   State<ViagemWidget> createState() => _ViagemWidgetState();
@@ -21,6 +26,15 @@ class _ViagemWidgetState extends State<ViagemWidget> {
           context,
           '/listEventos',
         );
+      },
+      onLongPress: () {
+        //open a dilog for delete
+        Dialogs.showConfirmDialog(context, 'Deseja realmente excluir a viagem?',
+            () async {
+          ViagensRepository viagensRepository = ViagensRepository();
+          await viagensRepository.deleteViagens(widget.map!['id']);
+          widget.getViagens();
+        });
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0),
