@@ -21,15 +21,14 @@ class _CreateViagemState extends State<CreateViagem> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Criar viagem'),
-        backgroundColor: Color.fromARGB(255, 0, 74, 173),
+        title: const Text('Criar viagem'),
+        backgroundColor: const Color.fromARGB(255, 0, 74, 173),
       ),
       body: SafeArea(
         child: Container(
-          color: Color.fromARGB(255, 0, 74, 173),
+          color: const Color.fromARGB(255, 0, 74, 173),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -52,10 +51,12 @@ class _CreateViagemState extends State<CreateViagem> {
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
+                                  children: const [
                                     Text(
                                       '   Preencha os campos para \ncriação de uma nova Viagem',
-                                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -68,7 +69,7 @@ class _CreateViagemState extends State<CreateViagem> {
                                       destino = value;
                                     });
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       labelText: 'Destino',
                                       hintText: 'Florianópolis',
                                       prefixIcon: Padding(
@@ -96,19 +97,22 @@ class _CreateViagemState extends State<CreateViagem> {
                                     labelText: 'Data ida',
                                     hintText: '01/01/2022',
                                     prefixIcon: Padding(
-                                      padding: EdgeInsets.all(2),
+                                      padding: const EdgeInsets.all(2),
                                       child: InkWell(
-                                        child: Icon(Icons.date_range),
+                                        child: const Icon(Icons.date_range),
                                         onTap: () async {
-                                          DateTimeRange? period = await showDateRangePicker(
+                                          DateTimeRange? period =
+                                              await showDateRangePicker(
                                             context: context,
                                             firstDate: DateTime(2022),
                                             lastDate: DateTime(2100),
                                             helpText: 'Selecione um período.',
                                             builder: ((context, child) => Theme(
                                                   data: ThemeData().copyWith(
-                                                    colorScheme: ColorScheme.light(
-                                                      primary: Color(0xFF3F5AA6),
+                                                    colorScheme:
+                                                        const ColorScheme.light(
+                                                      primary:
+                                                          Color(0xFF3F5AA6),
                                                       onPrimary: Colors.white,
                                                     ),
                                                   ),
@@ -117,8 +121,12 @@ class _CreateViagemState extends State<CreateViagem> {
                                           );
                                           if (period == null) return;
                                           setState(() {
-                                            dateFinal = DateFormat('yyyy-MM-dd').format(period.end).toString();
-                                            dateInit = DateFormat('yyyy-MM-dd').format(period.start).toString();
+                                            dateFinal = DateFormat('yyyy-MM-dd')
+                                                .format(period.end)
+                                                .toString();
+                                            dateInit = DateFormat('yyyy-MM-dd')
+                                                .format(period.start)
+                                                .toString();
                                           });
                                         },
                                       ),
@@ -141,24 +149,29 @@ class _CreateViagemState extends State<CreateViagem> {
                                       reverse: false,
                                     ),
                                   ],
-                                  initialValue: dateFinal ?? null,
+                                  initialValue: dateFinal,
                                   decoration: InputDecoration(
                                       labelText: 'Data retorno',
                                       hintText: '01/01/2022',
                                       prefixIcon: Padding(
-                                        padding: EdgeInsets.all(2),
+                                        padding: const EdgeInsets.all(2),
                                         child: InkWell(
-                                          child: Icon(Icons.date_range),
+                                          child: const Icon(Icons.date_range),
                                           onTap: () async {
-                                            DateTimeRange? period = await showDateRangePicker(
+                                            DateTimeRange? period =
+                                                await showDateRangePicker(
                                               context: context,
                                               firstDate: DateTime(1900),
                                               lastDate: DateTime(2100),
                                               helpText: 'Selecione um período.',
-                                              builder: ((context, child) => Theme(
+                                              builder: ((context, child) =>
+                                                  Theme(
                                                     data: ThemeData().copyWith(
-                                                      colorScheme: ColorScheme.light(
-                                                        primary: Color(0xFF3F5AA6),
+                                                      colorScheme:
+                                                          const ColorScheme
+                                                              .light(
+                                                        primary:
+                                                            Color(0xFF3F5AA6),
                                                         onPrimary: Colors.white,
                                                       ),
                                                     ),
@@ -167,8 +180,14 @@ class _CreateViagemState extends State<CreateViagem> {
                                             );
                                             if (period == null) return;
                                             setState(() {
-                                              dateFinal = DateFormat('yyyy-MM-dd').format(period.end).toString();
-                                              dateInit = DateFormat('yyyy-MM-dd').format(period.start).toString();
+                                              dateFinal =
+                                                  DateFormat('yyyy-MM-dd')
+                                                      .format(period.end)
+                                                      .toString();
+                                              dateInit =
+                                                  DateFormat('yyyy-MM-dd')
+                                                      .format(period.start)
+                                                      .toString();
                                             });
                                           },
                                         ),
@@ -188,7 +207,7 @@ class _CreateViagemState extends State<CreateViagem> {
                                     FilteringTextInputFormatter.digitsOnly,
                                     CurrencyInputFormatter(),
                                   ],
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       labelText: 'Valor planejado',
                                       hintText: 'R\$ 2.000,00',
                                       prefixIcon: Padding(
@@ -202,14 +221,16 @@ class _CreateViagemState extends State<CreateViagem> {
                                 Button(
                                   text: 'Salvar Viagem',
                                   onPressed: () {
-                                    var viagem = Map();
+                                    var viagem = {};
                                     viagem['destino'] = destino;
                                     viagem['dataInicio'] = dateInit;
                                     viagem['dataFim'] = dateFinal;
-                                    viagem['orcamento'] = orcamento?.replaceAll('R\$', '').replaceAll('.', '').replaceAll(',', '.').replaceAll(' ', '');
-                                    print(viagem);
+                                    viagem['orcamento'] = orcamento
+                                        ?.replaceAll('R\$', '')
+                                        .replaceAll('.', '')
+                                        .replaceAll(',', '.')
+                                        .replaceAll(' ', '');
                                     ViagensRepository.insertViagens(viagem);
-
                                     Navigator.of(context).pop();
                                   },
                                 ),
@@ -217,7 +238,7 @@ class _CreateViagemState extends State<CreateViagem> {
                                   height: height * 0.02,
                                 ),
                                 InkWell(
-                                  child: Text(
+                                  child: const Text(
                                     'Voltar',
                                     style: TextStyle(color: Colors.blue),
                                   ),
@@ -244,7 +265,8 @@ class _CreateViagemState extends State<CreateViagem> {
 
 class CurrencyInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     if (newValue.selection.baseOffset == 0) {
       return newValue;
     }
@@ -255,6 +277,8 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
     String newText = formatter.format(value / 100);
 
-    return newValue.copyWith(text: newText, selection: TextSelection.collapsed(offset: newText.length));
+    return newValue.copyWith(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length));
   }
 }

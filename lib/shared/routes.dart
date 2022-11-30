@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mygoodtrip/pages/Eventos/EventosList.dart';
-import 'package:mygoodtrip/pages/Viagens/CreateViagem.dart';
-import 'package:mygoodtrip/pages/Viagens/ListViagens.dart';
+import 'package:mygoodtrip/pages/Eventos/eventos_list.dart';
+import 'package:mygoodtrip/pages/Viagens/create_viagem.dart';
+import 'package:mygoodtrip/pages/Viagens/list_viagens.dart';
 import 'package:mygoodtrip/pages/dashboard/dashboard.dart';
 import 'package:mygoodtrip/pages/intro/intro.dart';
 import 'package:mygoodtrip/pages/login/login.dart';
@@ -12,7 +12,7 @@ class RouteGenerator {
       case '/login':
         return CupertinoPageRoute(builder: (_) => const Login());
       case '/dashboard':
-        return CupertinoPageRoute(builder: (_) => Dashboard());
+        return CupertinoPageRoute(builder: (_) => const Dashboard());
       case '/intro':
         return CupertinoPageRoute(builder: (_) => const Intro());
       case '/viagens':

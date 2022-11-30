@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mygoodtrip/pages/Viagens/ListViagens.dart';
-import 'package:mygoodtrip/pages/dashboard/Home.dart';
-import 'package:mygoodtrip/repository/viagens_repository.dart';
+import 'package:mygoodtrip/pages/Viagens/list_viagens.dart';
+import 'package:mygoodtrip/pages/dashboard/home.dart';
 import 'package:mygoodtrip/shared/routes.dart';
-import 'package:mygoodtrip/utils/prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
@@ -21,6 +19,8 @@ Future<dynamic> _getPrefs() async {
 
 class _DashboardState extends State<Dashboard> {
   String? name;
+
+  @override
   void initState() {
     super.initState();
     widget.onLoad(context);
@@ -35,16 +35,15 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return MaterialApp(
       onGenerateRoute: RouteGenerator.generateRoute,
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Color.fromARGB(255, 0, 74, 173),
-            title: Text("Home"),
+            backgroundColor: const Color.fromARGB(255, 0, 74, 173),
+            elevation: 0,
+            toolbarHeight: 0,
           ),
           bottomNavigationBar: menu(),
           body: Container(
@@ -52,14 +51,13 @@ class _DashboardState extends State<Dashboard> {
             child: Scaffold(
               backgroundColor: Colors.transparent,
               body: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  Container(
-                    child: Home(
-                      name: name!,
-                    ),
+                  Home(
+                    name: name ?? '',
                   ),
-                  Container(child: ListViagens()),
-                  Container(child: Icon(Icons.directions_bike)),
+                  ListViagens(),
+                  const Icon(Icons.directions_bike),
                 ],
               ),
             ),
@@ -72,8 +70,9 @@ class _DashboardState extends State<Dashboard> {
 
 Widget menu() {
   return Container(
-    color: Color.fromARGB(255, 0, 74, 173),
-    child: TabBar(
+    color: const Color.fromARGB(255, 0, 74, 173),
+    child: const TabBar(
+      physics: NeverScrollableScrollPhysics(),
       labelColor: Colors.white,
       unselectedLabelColor: Colors.white70,
       indicatorSize: TabBarIndicatorSize.tab,

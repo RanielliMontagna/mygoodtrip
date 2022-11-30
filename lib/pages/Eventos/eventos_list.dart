@@ -12,8 +12,8 @@ class _EventosListState extends State<EventosList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Eventos'),
-        backgroundColor: Color.fromARGB(255, 0, 74, 173),
+        title: const Text('Eventos'),
+        backgroundColor: const Color.fromARGB(255, 0, 74, 173),
       ),
     );
   }

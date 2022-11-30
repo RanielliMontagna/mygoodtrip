@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ViagemWidget extends StatefulWidget {
   Map? map;
@@ -27,8 +26,13 @@ class _ViagemWidgetState extends State<ViagemWidget> {
         padding: const EdgeInsets.symmetric(vertical: 0),
         child: Container(
           height: height * 0.18,
-          decoration: BoxDecoration(
-            boxShadow: <BoxShadow>[BoxShadow(color: Color.fromARGB(255, 92, 225, 230), blurRadius: 3.0, offset: Offset(0.0, 0.75))],
+          decoration: const BoxDecoration(
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Color.fromARGB(255, 92, 225, 230),
+                  blurRadius: 3.0,
+                  offset: Offset(0.0, 0.75))
+            ],
             borderRadius: BorderRadius.all(Radius.circular(50)),
             color: Color.fromARGB(255, 0, 74, 173),
           ),

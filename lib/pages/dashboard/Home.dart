@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   final String name;
@@ -19,7 +18,7 @@ class _HomeState extends State<Home> {
     final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Container(
-        color: Color.fromARGB(255, 0, 74, 173),
+        color: const Color.fromARGB(255, 0, 74, 173),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
