@@ -9,7 +9,7 @@ class ViagensRepository {
 
     try {
       List<Map> result = await db.rawQuery('SELECT * FROM $nameDatabase');
-      print(result.toList());
+
       if (result.isNotEmpty) {
         return result.toList();
       } else {
@@ -24,7 +24,8 @@ class ViagensRepository {
     Database db = await DatabaseService.datebase;
 
     try {
-      List<Map> result = await db.rawQuery('SELECT * FROM $nameDatabase where id = $id limit 1');
+      List<Map> result = await db
+          .rawQuery('SELECT * FROM $nameDatabase where id = $id limit 1');
       if (result.isNotEmpty) {
         return result.toList();
       } else {
@@ -46,7 +47,8 @@ class ViagensRepository {
         'orcamento': viagens['orcamento'],
       });
     } catch (err) {
-      throw Exception('Ocorreu algum erro ao inserir as questões. Motivo: $err');
+      throw Exception(
+          'Ocorreu algum erro ao inserir as questões. Motivo: $err');
     }
   }
 
@@ -68,7 +70,8 @@ class ViagensRepository {
         ],
       );
     } catch (err) {
-      throw Exception('Ocorreu algum erro ao atualizar as questões. Motivo: $err');
+      throw Exception(
+          'Ocorreu algum erro ao atualizar as questões. Motivo: $err');
     }
   }
 
@@ -76,9 +79,11 @@ class ViagensRepository {
     Database db = await DatabaseService.datebase;
 
     try {
-      await db.rawQuery('DELETE FROM $nameDatabase WHERE id = $id');
+      await db.delete('eventos', where: 'viagem = ?', whereArgs: [id]);
+      await db.delete(nameDatabase, where: 'id = ?', whereArgs: [id]);
     } catch (err) {
-      throw Exception('Ocorreu algum erro ao deletar as questões. Motivo: $err');
+      throw Exception(
+          'Ocorreu algum erro ao deletar as questões. Motivo: $err');
     }
   }
 }

@@ -17,12 +17,16 @@ class CreateEvento extends StatefulWidget {
 
 class _CreateViagemState extends State<CreateEvento> {
   String? descricao;
-  List<String> modosPagementos = ['Cartão de crédito', 'cartão de débito', 'PIX', 'Dinheiro vivo'];
+  List<String> modosPagamentos = [
+    'Cartão de crédito',
+    'cartão de débito',
+    'PIX',
+    'Dinheiro vivo'
+  ];
   String? modoPagamento;
   String? valor;
   @override
   Widget build(BuildContext context) {
-    print(widget.idViagem);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +35,7 @@ class _CreateViagemState extends State<CreateEvento> {
       ),
       body: SafeArea(
         child: Container(
-          color: const Color.fromARGB(255, 0, 74, 173),
+          color: Colors.white,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +61,9 @@ class _CreateViagemState extends State<CreateEvento> {
                                   children: const [
                                     Text(
                                       '   Preencha os campos para \ncriação de um novo evento',
-                                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
@@ -107,10 +113,12 @@ class _CreateViagemState extends State<CreateEvento> {
                                   children: [
                                     DropdownButton<String>(
                                       isExpanded: true,
-                                      value: modoPagamento ?? modosPagementos.first,
+                                      value: modoPagamento ??
+                                          modosPagamentos.first,
                                       icon: const Icon(Icons.arrow_downward),
                                       elevation: 16,
-                                      style: const TextStyle(color: Colors.black),
+                                      style:
+                                          const TextStyle(color: Colors.black),
                                       underline: Container(
                                         height: 2,
                                         color: Colors.blue,
@@ -121,7 +129,9 @@ class _CreateViagemState extends State<CreateEvento> {
                                           modoPagamento = value!;
                                         });
                                       },
-                                      items: modosPagementos.map<DropdownMenuItem<String>>((String value) {
+                                      items: modosPagamentos
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
                                         return DropdownMenuItem<String>(
                                           value: value,
                                           child: Text(value),
@@ -140,8 +150,11 @@ class _CreateViagemState extends State<CreateEvento> {
                                     evento['descricao'] = descricao;
                                     evento['viagem'] = widget.idViagem;
                                     evento['valor'] = valor;
-                                    evento['data'] = DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now());
-                                    evento['modoPagamento'] = modoPagamento;
+                                    evento['data'] =
+                                        DateFormat('dd/MM/yyyy HH:mm')
+                                            .format(DateTime.now());
+                                    evento['modoPagamento'] =
+                                        modoPagamento ?? modosPagamentos.first;
                                     EventosRepository.insertEventos(evento);
                                     Navigator.of(context).pop();
                                   },
@@ -177,7 +190,8 @@ class _CreateViagemState extends State<CreateEvento> {
 
 class CurrencyInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     if (newValue.selection.baseOffset == 0) {
       return newValue;
     }
@@ -188,6 +202,8 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
     String newText = formatter.format(value / 100);
 
-    return newValue.copyWith(text: newText, selection: TextSelection.collapsed(offset: newText.length));
+    return newValue.copyWith(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length));
   }
 }

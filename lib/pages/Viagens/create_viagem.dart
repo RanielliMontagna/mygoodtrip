@@ -28,7 +28,7 @@ class _CreateViagemState extends State<CreateViagem> {
       ),
       body: SafeArea(
         child: Container(
-          color: const Color.fromARGB(255, 0, 74, 173),
+          color: Colors.white,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -53,10 +53,12 @@ class _CreateViagemState extends State<CreateViagem> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
                                     Text(
-                                      '   Preencha os campos para \ncriação de uma nova Viagem',
+                                      'Preencha os campos para \ncriação de uma nova Viagem',
                                       style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),

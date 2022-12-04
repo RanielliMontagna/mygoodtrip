@@ -6,9 +6,9 @@ class EventosRepository {
 
   static Future<List<Map>?> getEventos(idViagem) async {
     Database db = await DatabaseService.datebase;
-    print(db);
     try {
-      List<Map> result = await db.rawQuery('SELECT * FROM $nameDatabase where viagem = $idViagem order by id desc');
+      List<Map> result = await db.rawQuery(
+          'SELECT * FROM $nameDatabase where viagem = $idViagem order by id desc');
       if (result.isNotEmpty) {
         return result.toList();
       } else {
@@ -31,7 +31,8 @@ class EventosRepository {
         'modoPagamento': eventos['modoPagamento'],
       });
     } catch (err) {
-      throw Exception('Ocorreu algum erro ao inserir as questões. Motivo: $err');
+      throw Exception(
+          'Ocorreu algum erro ao inserir as questões. Motivo: $err');
     }
   }
 
@@ -54,7 +55,8 @@ class EventosRepository {
         ],
       );
     } catch (err) {
-      throw Exception('Ocorreu algum erro ao atualizar as questões. Motivo: $err');
+      throw Exception(
+          'Ocorreu algum erro ao atualizar as questões. Motivo: $err');
     }
   }
 
@@ -62,9 +64,16 @@ class EventosRepository {
     Database db = await DatabaseService.datebase;
 
     try {
-      await db.rawQuery('DELETE FROM $nameDatabase WHERE id = $id');
+      await db.delete(
+        nameDatabase,
+        where: 'id = ?',
+        whereArgs: [
+          id,
+        ],
+      );
     } catch (err) {
-      throw Exception('Ocorreu algum erro ao deletar as questões. Motivo: $err');
+      throw Exception(
+          'Ocorreu algum erro ao deletar as questões. Motivo: $err');
     }
   }
 }

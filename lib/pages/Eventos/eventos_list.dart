@@ -24,26 +24,26 @@ class _EventosListState extends State<EventosList> {
     List<Map?>? map = await ViagensRepository.getViagem(widget.idViagem);
     setState(() {
       viagem = map ?? [];
-      print(viagem);
     });
   }
 
   getEventos() async {
     List<Map?>? map = await EventosRepository.getEventos(widget.idViagem);
-    print(map);
     setState(() {
       events.clear();
-      for (var element in map!) {
-        print(element);
+      for (var element in map ?? []) {
         events.add(TimelineEventDisplay(
             child: GestureDetector(
               child: TimelineEventCard(
                 title: Text(element!['descricao']),
-                content: Text("Pagamento de ${element['valor']} no ${element['modoPagamento']}"),
+                content: Text(
+                  "Pagamento de ${element['valor']} no ${element['modoPagamento']}",
+                  style: const TextStyle(fontSize: 14),
+                ),
               ),
               onLongPress: () {
-                Dialogs.showConfirmDialog(context, 'Deseja realmente excluir o evento?', () async {
-                  ViagensRepository viagensRepository = ViagensRepository();
+                Dialogs.showConfirmDialog(
+                    context, 'Deseja realmente excluir o evento?', () async {
                   await EventosRepository.deleteEventos(element['id']);
                   getEventos();
                 });
@@ -56,6 +56,7 @@ class _EventosListState extends State<EventosList> {
 
   @override
   void initState() {
+    viagem = [];
     super.initState();
     getViagens();
     events.clear;
@@ -67,12 +68,12 @@ class _EventosListState extends State<EventosList> {
     if (events.isEmpty) {
       events.add(TimelineEventDisplay(
           child: TimelineEventCard(
-            title: Text("Criação da Viagem"),
-            content: Text("Criação da Viagem para ${viagem[0]!['destino']}"),
+            title: const Text("Criação da Viagem"),
+            content: Text(
+                "Criação da Viagem para ${viagem.isNotEmpty ? viagem[0]!['destino'] : ''}"),
           ),
           indicator: TimelineDots.of(context).circleIcon));
     }
-    ;
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -96,8 +97,13 @@ class _EventosListState extends State<EventosList> {
                   child: Column(
                     children: [
                       Text(
-                        viagem[0]!['destino'].toString(),
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        viagem.isNotEmpty
+                            ? viagem[0]!['destino'].toString()
+                            : '',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       SizedBox(
                         height: height * 0.005,
@@ -107,11 +113,15 @@ class _EventosListState extends State<EventosList> {
                           SizedBox(
                             width: width * 0.03,
                           ),
-                          Text("Data de ida:"),
+                          const Text("Data de ida:"),
                           SizedBox(
                             width: width * 0.01,
                           ),
-                          Text(viagem[0]!['dataInicio'].toString()),
+                          Text(
+                            viagem.isNotEmpty
+                                ? viagem[0]!['dataInicio'].toString()
+                                : '',
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -122,11 +132,15 @@ class _EventosListState extends State<EventosList> {
                           SizedBox(
                             width: width * 0.03,
                           ),
-                          Text("Data de volta:"),
+                          const Text("Data de volta:"),
                           SizedBox(
                             width: width * 0.01,
                           ),
-                          Text(viagem[0]!['dataFim'].toString()),
+                          Text(
+                            viagem.isNotEmpty
+                                ? viagem[0]!['dataFim'].toString()
+                                : '',
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -137,20 +151,19 @@ class _EventosListState extends State<EventosList> {
                           SizedBox(
                             width: width * 0.03,
                           ),
-                          Text("Orçamento:"),
+                          const Text("Orçamento:"),
                           SizedBox(
                             width: width * 0.01,
                           ),
-                          Text('R\$${viagem[0]!['orcamento'].toString()}'),
+                          Text(
+                              'R\$${viagem.isNotEmpty ? viagem[0]!['orcamento'].toString() : ''}'),
                         ],
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                height: 0.02,
-              ),
+              const SizedBox(height: 0.02),
               Card(
                 child: Expanded(
                   child: SizedBox(
@@ -176,8 +189,11 @@ class _EventosListState extends State<EventosList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(
-            context,
-        MaterialPageRoute(builder: (context) => CreateEvento(idViagem: viagem[0]!['id']),));
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreateEvento(
+                    idViagem: viagem.isNotEmpty ? viagem[0]!['id'] : 0),
+              ));
           getEventos();
         },
         backgroundColor: Colors.blue[800],

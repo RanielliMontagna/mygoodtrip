@@ -17,6 +17,7 @@ class _ListViagensState extends State<ListViagens> {
 
   void getViagens() async {
     List<Map?>? map = await ViagensRepository.getViagens();
+
     setState(() {
       viagens = map ?? [];
     });
@@ -27,9 +28,9 @@ class _ListViagensState extends State<ListViagens> {
     super.initState();
     getViagens();
   }
+
   @override
   Widget build(BuildContext context) {
-
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -56,8 +57,9 @@ class _ListViagensState extends State<ListViagens> {
                             itemBuilder: (BuildContext context, int itemIndex,
                                     int pageViewIndex) =>
                                 ViagemWidget(
-                                    map: viagens[itemIndex],
-                                    getViagens: getViagens),
+                              map: viagens[itemIndex],
+                              getViagens: getViagens,
+                            ),
                             options: CarouselOptions(
                               height: height * 0.5,
                               enableInfiniteScroll: false,
@@ -66,9 +68,28 @@ class _ListViagensState extends State<ListViagens> {
                               enlargeCenterPage: true,
                             ),
                           )
-                        : const Center(
-                            child: CircularProgressIndicator(),
-                          )),
+                        : Center(
+                            child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                'Nenhuma viagem cadastrada',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Cadastre uma viagem para começar',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ))),
               ],
             ),
           ),
