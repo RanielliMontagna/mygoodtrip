@@ -13,6 +13,8 @@ class DatabaseScripts {
       dataFim DATE,
       orcamento DOUBLE
     );
+    """,
+    """
    CREATE TABLE eventos (
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       viagem Integer,

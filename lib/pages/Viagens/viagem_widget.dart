@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:mygoodtrip/pages/Eventos/eventos_list.dart';
 import 'package:mygoodtrip/repository/eventos_repository.dart';
 import 'package:mygoodtrip/repository/viagens_repository.dart';
 import 'package:mygoodtrip/utils/dialogs.dart';
@@ -14,18 +15,20 @@ class ViagemWidget extends StatefulWidget {
   State<ViagemWidget> createState() => _ViagemWidgetState();
 }
 
+
 class _ViagemWidgetState extends State<ViagemWidget> {
   @override
   Widget build(BuildContext context) {
     Map? map = widget.map;
+    Argumentos argumento = Argumentos(widget.map!['id']);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          '/listEventos',
-        );
+        Navigator.push(
+            context,
+        MaterialPageRoute(builder: (context) => EventosList(idViagem: widget.map!['id'],),));
+
       },
       onLongPress: () {
         //open a dilog for delete
@@ -150,4 +153,8 @@ class _ViagemWidgetState extends State<ViagemWidget> {
       ),
     );
   }
+}
+class Argumentos {
+  int? idViagem;
+  Argumentos(this.idViagem);
 }

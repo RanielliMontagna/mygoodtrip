@@ -4,13 +4,13 @@ import 'package:sqflite/sqflite.dart';
 class EventosRepository {
   static const nameDatabase = 'eventos';
 
-  Future<Map?> getEventos() async {
+  static Future<List<Map>?> getEventos(idViagem) async {
     Database db = await DatabaseService.datebase;
-
+    print(db);
     try {
-      List<Map> result = await db.rawQuery('SELECT * FROM $nameDatabase');
+      List<Map> result = await db.rawQuery('SELECT * FROM $nameDatabase where viagem = $idViagem order by id desc');
       if (result.isNotEmpty) {
-        return result[0];
+        return result.toList();
       } else {
         return null;
       }
@@ -19,7 +19,7 @@ class EventosRepository {
     }
   }
 
-  Future<void> insertEventos(Map eventos) async {
+  static Future<void> insertEventos(Map eventos) async {
     Database db = await DatabaseService.datebase;
 
     try {
@@ -31,8 +31,7 @@ class EventosRepository {
         'modoPagamento': eventos['modoPagamento'],
       });
     } catch (err) {
-      throw Exception(
-          'Ocorreu algum erro ao inserir as questões. Motivo: $err');
+      throw Exception('Ocorreu algum erro ao inserir as questões. Motivo: $err');
     }
   }
 
@@ -55,19 +54,17 @@ class EventosRepository {
         ],
       );
     } catch (err) {
-      throw Exception(
-          'Ocorreu algum erro ao atualizar as questões. Motivo: $err');
+      throw Exception('Ocorreu algum erro ao atualizar as questões. Motivo: $err');
     }
   }
 
-  Future<void> deleteEventos(int id) async {
+  static Future<void> deleteEventos(int id) async {
     Database db = await DatabaseService.datebase;
 
     try {
       await db.rawQuery('DELETE FROM $nameDatabase WHERE id = $id');
     } catch (err) {
-      throw Exception(
-          'Ocorreu algum erro ao deletar as questões. Motivo: $err');
+      throw Exception('Ocorreu algum erro ao deletar as questões. Motivo: $err');
     }
   }
 }

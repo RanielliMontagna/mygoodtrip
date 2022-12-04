@@ -27,9 +27,9 @@ class _ListViagensState extends State<ListViagens> {
     super.initState();
     getViagens();
   }
-
   @override
   Widget build(BuildContext context) {
+
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(

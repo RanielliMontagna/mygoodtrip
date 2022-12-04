@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mygoodtrip/pages/Viagens/list_viagens.dart';
+import 'package:mygoodtrip/pages/dashboard/Home.dart';
 import 'package:mygoodtrip/pages/dashboard/home.dart';
 import 'package:mygoodtrip/shared/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';

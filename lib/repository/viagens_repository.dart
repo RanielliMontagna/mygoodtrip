@@ -20,6 +20,21 @@ class ViagensRepository {
     }
   }
 
+  static Future<List<Map?>?> getViagem(id) async {
+    Database db = await DatabaseService.datebase;
+
+    try {
+      List<Map> result = await db.rawQuery('SELECT * FROM $nameDatabase where id = $id limit 1');
+      if (result.isNotEmpty) {
+        return result.toList();
+      } else {
+        return null;
+      }
+    } catch (err) {
+      throw Exception('Ocorreu algum erro ao buscar as questões. Motivo: $err');
+    }
+  }
+
   static Future<void> insertViagens(Map viagens) async {
     Database db = await DatabaseService.datebase;
 
